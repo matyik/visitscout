@@ -1,0 +1,580 @@
+@font-face {
+  font-family: 'Hammersmith One';
+  src: url(./HammersmithOne-Regular.ttf) format("truetype");
+}
+
+@-webkit-keyframes slideup {
+  from {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes slideup {
+  from {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes slide-right {
+  from {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    right: 120%;
+  }
+  to {
+    right: 0%;
+  }
+}
+
+@keyframes slide {
+  from {
+    right: 120%;
+  }
+  to {
+    right: 0%;
+  }
+}
+
+.website-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100vw;
+}
+
+.website-container h1 {
+  font-family: Hammersmith One;
+  font-size: 28pt;
+  color: #ff6819;
+  margin-bottom: 0;
+}
+
+.website-container h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20pt;
+  color: #233f91;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.website-container .smalltext {
+  color: #ff6819;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+}
+
+.website-container .month-chart-container {
+  width: 60vw;
+}
+
+.website-container .double-pie {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  border-top: 2px solid #233f91;
+  border-bottom: 2px solid #233f91;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.website-container .double-pie .pie-chart-container {
+  height: clamp(250px, 15vw, 300px);
+  width: clamp(200px, 18vw, 350px);
+}
+
+.website-container .timezonemap {
+  width: 80vw;
+  padding-top: 1rem;
+  position: relative;
+}
+
+.website-container .timezonemap img {
+  width: 100%;
+}
+
+.website-container .timezonemap .points-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.website-container .timezonemap .points-container svg {
+  position: relative;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.website-container .timezonemap .points-container svg:hover {
+  -webkit-transform: scale(1.2, 1.2) translateY(-4px);
+          transform: scale(1.2, 1.2) translateY(-4px);
+}
+
+.dashboard-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  height: calc(100vh - 2.4rem);
+}
+
+.dashboard-container .left-panel {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #233f91;
+  font-size: 16pt;
+  border-right: 2px solid #ffad33;
+  min-width: 10rem;
+}
+
+.dashboard-container .left-panel .dashboard-option {
+  margin: 0.5rem;
+  cursor: pointer;
+  border-bottom: 2px solid #ebf2ff;
+}
+
+.dashboard-container .left-panel .dashboard-option:hover {
+  border-bottom-color: #ffad33;
+}
+
+.dashboard-container .left-panel .option-selected {
+  border-bottom-color: #ffad33;
+}
+
+.dashboard-container .left-panel .copy-container {
+  height: 100%;
+  position: relative;
+}
+
+.dashboard-container .left-panel .copy-container .copyright {
+  position: absolute;
+  bottom: 0;
+  font-size: 12pt;
+  margin: 1rem;
+}
+
+.dashboard-container .dashboard-content {
+  width: 100%;
+}
+
+.dashboard-container .dashboard-content h2 {
+  text-align: center;
+  font-family: Hammersmith One;
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .auto-grid {
+  display: -ms-grid;
+  display: grid;
+  padding: 2rem;
+  -ms-grid-columns: clamp(15rem, 30%, 30rem);
+      grid-template-columns: clamp(15rem, 30%, 30rem);
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+  -webkit-column-gap: 2rem;
+          column-gap: 2rem;
+  row-gap: 3rem;
+}
+
+.dashboard-container .dashboard-content .auto-grid .website {
+  background-color: #aac2fd;
+  border-radius: 0.5rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 1rem;
+  -webkit-box-shadow: 1px 1px 1px 1px #233f91;
+          box-shadow: 1px 1px 1px 1px #233f91;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+  cursor: pointer;
+}
+
+.dashboard-container .dashboard-content .auto-grid .website:hover {
+  -webkit-box-shadow: 2px 2px 2px 2px #233f91;
+          box-shadow: 2px 2px 2px 2px #233f91;
+}
+
+.dashboard-container .dashboard-content .auto-grid .website h4 {
+  margin: 0.5rem;
+  color: #ff6819;
+  font-family: Hammersmith One;
+}
+
+.dashboard-container .dashboard-content .auto-grid .website .bottom-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .auto-grid .website .bottom-bar .number {
+  color: #ff6819;
+}
+
+body {
+  margin: 0;
+  background-color: #ebf2ff;
+}
+
+.navbar {
+  background-color: #233f91;
+  border-bottom: 2px solid #ffad33;
+  padding-bottom: 0.7rem;
+  padding-top: 0.7rem;
+  font-family: Arial, Helvetica, sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-size: 12pt;
+}
+
+.navbar a,
+.navbar span {
+  cursor: pointer;
+  color: #ffad33;
+  text-decoration: none;
+}
+
+.navbar a:hover,
+.navbar span:hover {
+  text-decoration: underline;
+}
+
+.left-section {
+  width: 45vw;
+  margin-left: 2rem;
+}
+
+.left-section .h1area {
+  overflow: hidden;
+}
+
+.left-section .h1area h1 {
+  font-family: Hammersmith One;
+  font-size: 48pt;
+  line-height: 42pt;
+  text-shadow: 5px 5px #aac2fd;
+  color: #ff6819;
+  -webkit-animation-name: slideup;
+          animation-name: slideup;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  z-index: 1;
+}
+
+.left-section .h1area .bottom {
+  height: 4px;
+  width: 100%;
+  background: -webkit-gradient(linear, left top, right top, from(#ff6819), color-stop(30%), to(#aac2fd));
+  background: linear-gradient(90deg, #ff6819, 30%, #aac2fd);
+  z-index: 2;
+  -webkit-animation-name: slide-right;
+          animation-name: slide-right;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+.left-section p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16pt;
+  color: #233f91;
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+button {
+  border-radius: 1.5rem;
+  background-color: #ff6819;
+  color: #fff;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border: none;
+  font-size: 16pt;
+  cursor: pointer;
+  -webkit-box-shadow: 1px 1px 1px 1px #aac2fd;
+          box-shadow: 1px 1px 1px 1px #aac2fd;
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-transition: background-color 200ms, color 200ms;
+  transition: background-color 200ms, color 200ms;
+}
+
+button:hover {
+  background-color: transparent;
+  color: #ff6819;
+  border: 2px solid #ff6819;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  padding-bottom: 0.375rem;
+  padding-top: 0.375rem;
+}
+
+.form-container {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: url(orangebg.svg);
+}
+
+.form-container form {
+  background-color: #aac2fd;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  border: 2px solid #233f91;
+  border-radius: 0.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-shadow: 2px 2px 5px 5px #ffad33;
+          box-shadow: 2px 2px 5px 5px #ffad33;
+}
+
+.form-container form h3 {
+  color: #233f91;
+  font-family: Hammersmith One;
+  font-size: 24pt;
+}
+
+.form-container form a {
+  color: #233f91;
+}
+
+.form-container form .register {
+  padding-top: 1rem;
+}
+
+.form-container form input {
+  border: 2px solid #233f91;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 16pt;
+  padding-left: 1rem;
+  border-radius: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  outline: none;
+  color: #ff6819;
+}
+
+.form-container form button {
+  margin-top: 1rem;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container .register-form {
+  background-color: #ebf2ff;
+  margin: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 80vh;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 20rem;
+  z-index: 2;
+  padding-right: 1rem;
+}
+
+.container .register-form h2 {
+  color: #233f91;
+  font-family: Hammersmith One;
+  margin-left: 1rem;
+}
+
+.container .register-form input {
+  margin-bottom: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+  border-bottom: 2px solid #233f91;
+  font-size: 14pt;
+  background-color: transparent;
+  padding-left: 1rem;
+  color: #233f91;
+}
+
+.container .register-form button {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.container .dots {
+  margin-top: 1rem;
+  height: 80vh;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+::-webkit-input-placeholder {
+  color: #aac2fd;
+}
+
+:-ms-input-placeholder {
+  color: #aac2fd;
+}
+
+::-ms-input-placeholder {
+  color: #aac2fd;
+}
+
+::placeholder {
+  color: #aac2fd;
+}
+
+.alerts-container {
+  position: fixed;
+  top: 6rem;
+  left: 2rem;
+  overflow: hidden;
+  padding-right: 0.5rem;
+  font-family: Hammersmith One;
+  z-index: 4;
+}
+
+.alerts-container .alert-container {
+  position: relative;
+  padding: 0.5rem;
+  background-color: #b92424;
+  color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0.2rem 0.2rem 0.2rem #aac2fd;
+          box-shadow: 0.2rem 0.2rem 0.2rem #aac2fd;
+  margin-bottom: 1rem;
+  -webkit-animation-name: slide;
+          animation-name: slide;
+  -webkit-animation-duration: 200ms;
+          animation-duration: 200ms;
+}
+
+footer {
+  background-color: #aac2fd;
+  color: #233f91;
+  width: 100vw;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  border-top: 2px solid #ff6819;
+}
+
+footer a {
+  color: #ff6819;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+/*# sourceMappingURL=styles.css.map */
