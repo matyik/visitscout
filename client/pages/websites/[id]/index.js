@@ -7,22 +7,43 @@ import { useRouter } from 'next/router'
 import { connect } from 'react-redux'
 import Navbar from '../../../components/Navbar'
 
-const timezonestest = [
-  {
-    visits: 24,
-    left: 19,
-    top: 22.5,
-    opacity: 1
+const dataTest = {
+  _id: { $oid: '609f492c1f64242c204dacd3' },
+  browsers: { firefox: 824, chrome: 2683, edge: 200, safari: 602 },
+  os: { ios: 221, windows: 2012, mac: 1957, linux: 222, android: 361 },
+  visits: 4051,
+  mobile: 1422,
+  probablyBot: 295,
+  name: 'Test Site',
+  user: '6085fd5d98482822d8dd8bcb',
+  createdAt: '2021-05-15T04:08:12.284Z',
+  __v: 0,
+  months: {
+    'm2021-4': 701,
+    'm2021-3': 597,
+    'm2021-3': 511,
+    'm2021-2': 430,
+    'm2021-1': 407,
+    'm2021-0': 340,
+    'm2020-11': 280,
+    'm2020-10': 297,
+    'm2020-9': 164,
+    'm2020-8': 124,
+    'm2020-7': 97,
+    'm2020-6': 35,
+    'm2020-5': 9
   },
-  {
-    visits: 9,
-    left: 47.5,
-    top: 17.5,
-    opacity: 0.5
-  }
-]
+  pages: { '/dashboard': 3412, '/login': 300, '/register': 121 },
+  timeZones: { t5: 893, t6: 700, t7: 1012, t4: 999, 't-1': 407, 't-2': 512 }
+}
 
-const Website = ({ auth: { token } }) => {
+const Website = ({
+  auth: {
+    user: {
+      data: { websites }
+    }
+  }
+}) => {
   // const [websiteId, setWebsiteId] = useState()
   // const router = useRouter()
   // useEffect(async () => {
@@ -34,25 +55,152 @@ const Website = ({ auth: { token } }) => {
   //     }
   //   )
   // }, [])
+
+  const calculateStats = () => {
+    const { visits, months, browsers, os, timeZones, pages, mobile } =
+      websites[0]
+
+    const MONTHS = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ]
+    const TIMEZONES = {
+      11: [10, 10],
+      10: [4, 37],
+      9: [10, 45],
+      8: [16.5, 11],
+      7: [15.5, 25],
+      6: [19, 22],
+      5: [21, 28.5],
+      4: [27.5, 22.5],
+      3: [24.5, 61],
+      2: [38.5, 3],
+      1: [41, 40],
+      '-0': [43.5, 5],
+      '-1': [47, 14],
+      '-2': [50, 16],
+      '-3': [57, 12],
+      '-4': [63, 37],
+      '-5': [66, 32],
+      '-5.5': [68, 32],
+      '-6': [65.5, 18],
+      '-7': [77, 39],
+      '-8': [78, 24],
+      '-9': [84.4, 24],
+      '-10': [88, 75],
+      '-11': [81.5, 7.5],
+      '-12': [93, 80]
+    }
+
+    let monthLabels = []
+    let monthData = []
+    let browserLabels = []
+    let browserData = []
+    let osLabels = []
+    let osData = []
+    let timeZonesCoords = []
+    let timeZoneData = []
+    let timeZoneLabels = []
+    let pagesData = []
+    let pagesLabels = []
+    let deviceData = [mobile, visits]
+
+    // Monthly
+    for (const [key, value] of Object.entries(months)) {
+      let monthText = key.split('-')
+      monthLabels.push(
+        `${MONTHS[monthText[1]]} ${monthText[0].substr(1, monthText[0].length)}`
+      )
+      monthData.push(value)
+    }
+
+    // Browser
+    for (const [key, value] of Object.entries(browsers)) {
+      browserLabels.push(key.charAt(0).toUpperCase() + key.slice(1))
+      browserData.push(value)
+    }
+
+    // OS
+    for (const [key, value] of Object.entries(os)) {
+      key.charAt(0) === 'i'
+        ? osLabels.push('iOS')
+        : osLabels.push(key.charAt(0).toUpperCase() + key.slice(1))
+      osData.push(value)
+    }
+
+    // Pages
+    for (const [key, value] of Object.entries(pages)) {
+      pagesLabels.push(key)
+      pagesData.push(value)
+    }
+
+    // Time Zone
+    for (const [keyy, value] of Object.entries(timeZones)) {
+      const key = keyy.slice(1)
+      timeZonesCoords.push({
+        left: TIMEZONES[key][0],
+        top: TIMEZONES[key][1]
+      })
+      timeZoneLabels.push(
+        `UTC${key.charAt(0) === '-' ? `+${key.slice(1)}` : `-${key}`}`
+      )
+      timeZoneData.push(value)
+    }
+
+    return {
+      monthLabels,
+      monthData,
+      browserLabels,
+      browserData,
+      osLabels,
+      osData,
+      timeZonesCoords,
+      timeZoneLabels,
+      timeZoneData,
+      pagesLabels,
+      pagesData,
+      deviceData
+    }
+  }
+
   return (
     <>
       <Head>{/* <title>Website {websiteId}</title> */}</Head>
       <Navbar />
       <div className='website-container'>
-        <h1>Test Site</h1>
-        <h3>134 Total Visits</h3>
-        <span className='smalltext'>(Excluding 12 bot visits)</span>
+        <h1>{dataTest.name}</h1>
+        <h3>{dataTest.visits} Total Visits</h3>
+        <span className='smalltext'>
+          (Excluding {dataTest.probablyBot} bot visits)
+        </span>
         <div className='month-chart-container'>
           <Bar
             data={{
               datasets: [
                 {
                   label: 'Visits',
-                  data: [25, 52, 123],
+                  data: calculateStats().monthData,
                   backgroundColor: ['#aac2fd']
                 }
               ],
-              labels: ['Mar 2021', 'Apr 2021', 'May 2021']
+              labels: calculateStats().monthLabels
+            }}
+            options={{
+              scales: {
+                x: {
+                  reverse: true
+                }
+              }
             }}
           />
         </div>
@@ -62,7 +210,7 @@ const Website = ({ auth: { token } }) => {
               data={{
                 datasets: [
                   {
-                    data: [5, 2, 5, 3],
+                    data: calculateStats().browserData,
                     backgroundColor: [
                       '#FFC294',
                       '#FFF6A1',
@@ -71,7 +219,7 @@ const Website = ({ auth: { token } }) => {
                     ]
                   }
                 ],
-                labels: ['Chrome', 'Firefox', 'Edge', 'Safari']
+                labels: calculateStats().browserLabels
               }}
             />
           </div>
@@ -80,7 +228,7 @@ const Website = ({ auth: { token } }) => {
               data={{
                 datasets: [
                   {
-                    data: [5, 2, 5, 3, 6],
+                    data: calculateStats().osData,
                     backgroundColor: [
                       '#FFC294',
                       '#FFF6A1',
@@ -90,22 +238,28 @@ const Website = ({ auth: { token } }) => {
                     ]
                   }
                 ],
-                labels: ['iOS', 'Windows', 'Mac', 'Linux', 'Android']
+                labels: calculateStats().osLabels
               }}
             />
           </div>
         </div>
+        <h4>Time Zones Visualizer</h4>
         <div className='timezonemap'>
           <img src='../../world.svg' alt='World Map SVG' />
           <div className='points-container'>
-            {timezonestest.map(({ visits, left, top, opacity }, index) => (
+            {calculateStats().timeZonesCoords.map(({ left, top }, index) => (
               <svg
                 key={`tz${index}`}
-                title={visits}
                 viewBox='0 0 166.418 166.418'
                 style={{ left: `${left}%`, top: `${top}%`, width: '40px' }}>
                 <path
-                  style={{ fill: '#ff6819', opacity }}
+                  style={{
+                    fill: '#ff6819',
+                    opacity:
+                      (calculateStats().timeZoneData[index] / dataTest.visits +
+                        1) /
+                      2
+                  }}
                   d='M83.209,166.418c-7.121,0-13.11-4.387-15.258-11.176l-3.572-11.285
     c-5.089-16.083-13.75-31.047-25.742-44.478c-9.853-11.036-15.236-25.269-15.156-40.078c0.086-15.993,6.312-30.945,17.53-42.102
     C52.229,6.144,67.215,0,83.209,0c32.934,0,59.728,26.794,59.728,59.729c0,15.138-5.676,29.576-15.982,40.657
@@ -135,7 +289,7 @@ const Website = ({ auth: { token } }) => {
               data={{
                 datasets: [
                   {
-                    data: [5, 2, 5, 3, 6],
+                    data: calculateStats().pagesData,
                     backgroundColor: [
                       '#FFC294',
                       '#FFF6A1',
@@ -145,7 +299,7 @@ const Website = ({ auth: { token } }) => {
                     ]
                   }
                 ],
-                labels: ['/', '/login', '/register', '/dashboard', '/settings']
+                labels: calculateStats().pagesLabels
               }}
             />
           </div>
@@ -162,7 +316,7 @@ const Website = ({ auth: { token } }) => {
               data={{
                 datasets: [
                   {
-                    data: [3, 3, 4, 6, 5],
+                    data: calculateStats().timeZoneData,
                     backgroundColor: [
                       '#FFC294',
                       '#FFF6A1',
@@ -172,7 +326,7 @@ const Website = ({ auth: { token } }) => {
                     ]
                   }
                 ],
-                labels: ['PDT', 'MDT', 'CDT', 'EDT', 'CEST']
+                labels: calculateStats().timeZoneLabels
               }}
             />
           </div>
@@ -189,7 +343,7 @@ const Website = ({ auth: { token } }) => {
               data={{
                 datasets: [
                   {
-                    data: [12, 42],
+                    data: calculateStats().deviceData,
                     backgroundColor: ['#FFC294', '#9B7AFF']
                   }
                 ],
@@ -209,6 +363,7 @@ const Website = ({ auth: { token } }) => {
 Website.propTypes = {
   auth: PropTypes.object.isRequired
 }
+
 const mapStateToProps = (state) => ({
   auth: state.auth
 })
