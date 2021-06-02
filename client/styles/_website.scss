@@ -1,8 +1,8 @@
-// $border_color_1: #FFC294;
-// $border_color_2: #FFF6A1;
-// $border_color_3: #FF86BC;
-// $border_color_4: #33E8FF;
-// $border_color_5: #9B7AFF;
+$alt_color_1: #ffc294;
+$alt_color_2: #fff6a1;
+$alt_color_3: #ff86bc;
+$alt_color_4: #33e8ff;
+$alt_color_5: #9b7aff;
 
 .website-container {
   display: flex;
@@ -28,6 +28,46 @@
   h4 {
     color: $color_3;
     font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .code-area {
+    color: $color_1;
+    font-family: monospace;
+    background-color: #09121b;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    margin: 1rem;
+    position: relative;
+
+    .fa-copy {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      cursor: pointer;
+      transition: all 200ms;
+
+      &:hover {
+        transform: scale(1.5, 1.5);
+      }
+    }
+
+    .color1 {
+      color: $alt_color_1;
+    }
+    .color2 {
+      color: $alt_color_2;
+    }
+    .color3 {
+      color: $alt_color_3;
+    }
+    .color4 {
+      color: $alt_color_4;
+    }
+    .color5 {
+      color: $alt_color_5;
+    }
   }
 
   .smalltext {

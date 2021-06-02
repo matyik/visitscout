@@ -1,41 +1,10 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import PropTypes from 'prop-types'
 import { Pie, Bar } from 'react-chartjs-2'
-import axios from 'axios'
-import { useRouter } from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import Navbar from '../../../components/Navbar'
-
-const dataTest = {
-  _id: { $oid: '609f492c1f64242c204dacd3' },
-  browsers: { firefox: 824, chrome: 2683, edge: 200, safari: 602 },
-  os: { ios: 221, windows: 2012, mac: 1957, linux: 222, android: 361 },
-  visits: 4051,
-  mobile: 1422,
-  probablyBot: 295,
-  name: 'Test Site',
-  user: '6085fd5d98482822d8dd8bcb',
-  createdAt: '2021-05-15T04:08:12.284Z',
-  __v: 0,
-  months: {
-    'm2021-4': 701,
-    'm2021-3': 597,
-    'm2021-3': 511,
-    'm2021-2': 430,
-    'm2021-1': 407,
-    'm2021-0': 340,
-    'm2020-11': 280,
-    'm2020-10': 297,
-    'm2020-9': 164,
-    'm2020-8': 124,
-    'm2020-7': 97,
-    'm2020-6': 35,
-    'm2020-5': 9
-  },
-  pages: { '/dashboard': 3412, '/login': 300, '/register': 121 },
-  timeZones: { t5: 893, t6: 700, t7: 1012, t4: 999, 't-1': 407, 't-2': 512 }
-}
 
 const Website = ({
   auth: {
@@ -173,15 +142,46 @@ const Website = ({
     }
   }
 
+  const copyText = () => {
+    navigator.permissions.query({ name: 'clipboard-write' }).then((result) => {
+      if (result.state == 'granted' || result.state == 'prompt') {
+        navigator.clipboard.writeText(
+          `<script>const VISITSCOUT_ID = '${websites[0]._id}'</script><script src='http://localhost:5000/tracker'></script>`
+        )
+      }
+    })
+  }
+
   return (
     <>
-      <Head>{/* <title>Website {websiteId}</title> */}</Head>
+      <Head>
+        <title>{websites[0].name} - Visitscout</title>
+      </Head>
       <Navbar />
       <div className='website-container'>
-        <h1>{dataTest.name}</h1>
-        <h3>{dataTest.visits} Total Visits</h3>
+        <h1>{websites[0].name}</h1>
+        <div className='code-area'>
+          <FontAwesomeIcon icon={faCopy} onClick={copyText} />
+          <span className='color2'>
+            &lt;!-- Add to your HTML to connect to Visitscout --&gt;
+          </span>
+          <br />
+          <span className='color1'>&lt;script&gt;</span>
+          <span className='color3'>const</span>{' '}
+          <span className='color5'>VISITSCOUT_ID</span>{' '}
+          <span className='color3'>=</span>{' '}
+          <span className='color4'>'{websites[0]._id}'</span>
+          <span className='color1'>&lt;/script&gt;</span>
+          <br />
+          <span className='color1'>&lt;script</span>{' '}
+          <span className='color3'>src</span>
+          <span className='color5'>=</span>
+          <span className='color4'>'http://localhost:5000/tracker'</span>
+          <span className='color1'>&gt;&lt;/script&gt;</span>
+        </div>
+        <h3>{websites[0].visits} Total Visits</h3>
         <span className='smalltext'>
-          (Excluding {dataTest.probablyBot} bot visits)
+          (Excluding {websites[0].probablyBot} bot visits)
         </span>
         <div className='month-chart-container'>
           <Bar
@@ -256,7 +256,8 @@ const Website = ({
                   style={{
                     fill: '#ff6819',
                     opacity:
-                      (calculateStats().timeZoneData[index] / dataTest.visits +
+                      (calculateStats().timeZoneData[index] /
+                        websites[0].visits +
                         1) /
                       2
                   }}

@@ -117,6 +117,52 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.website-container .code-area {
+  color: #ebf2ff;
+  font-family: monospace;
+  background-color: #09121b;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
+  margin: 1rem;
+  position: relative;
+}
+
+.website-container .code-area .fa-copy {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.website-container .code-area .fa-copy:hover {
+  -webkit-transform: scale(1.5, 1.5);
+          transform: scale(1.5, 1.5);
+}
+
+.website-container .code-area .color1 {
+  color: #ffc294;
+}
+
+.website-container .code-area .color2 {
+  color: #fff6a1;
+}
+
+.website-container .code-area .color3 {
+  color: #ff86bc;
+}
+
+.website-container .code-area .color4 {
+  color: #33e8ff;
+}
+
+.website-container .code-area .color5 {
+  color: #9b7aff;
+}
+
 .website-container .smalltext {
   color: #ff6819;
   font-family: Arial, Helvetica, sans-serif;
