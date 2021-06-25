@@ -6,9 +6,11 @@ import {
   faCog,
   faDesktop,
   faQuestionCircle,
-  faList
+  faList,
+  faPlusCircle
 } from '@fortawesome/free-solid-svg-icons'
 import auth from '../actions/auth'
+import axios from 'axios'
 
 const VIEWS = [
   ['Overview', faList],
@@ -19,6 +21,33 @@ const VIEWS = [
 
 const Dashboard = ({ userData }) => {
   const [view, setView] = useState(0)
+  const [showSubmit, setShowSubmit] = useState(false)
+
+  const changeEmail = async (e) => {
+    const res = await axios.put(
+      'http://localhost:5000/api/auth/updatedetails',
+      { email: e.target[0].value }
+    )
+  }
+
+  const changePwd = async (e) => {
+    const res = await axios.put(
+      'http://localhost:5000/api/auth/updatepassword',
+      { currentPassword: e.target[0].value, newPassword: e.target[1].value },
+      { headers: { Authorization: `Bearer ${userData.token}` } }
+    )
+  }
+
+  // Show submit button if user has typed
+  const checkForButton = (e) => {
+    console.log(e.target)
+    if (e.target.value) {
+      setShowSubmit(true)
+    } else {
+      setShowSubmit(false)
+    }
+  }
+
   return (
     <>
       <div className='dashboard-container'>
@@ -42,10 +71,21 @@ const Dashboard = ({ userData }) => {
         </div>
         <section className='dashboard-content'>
           <h2>{VIEWS[view][0]}</h2>
-          {view === 0 && 'ill do this last'}
+          {view === 0 && (
+            <div className='auto-grid'>
+              <div className='card-option'>
+                <h4>
+                  Add Website <FontAwesomeIcon icon={faPlusCircle} />
+                </h4>
+              </div>
+              <div className='card-option' onClick={() => setView(1)}>
+                <h4>View Websites</h4>
+              </div>
+            </div>
+          )}
           {view === 1 && (
             <div className='auto-grid'>
-              {userData.websites.map((item, index) => (
+              {userData.user.data.websites.map((item, index) => (
                 <Link key={`site${index}`} href={`/websites/${item._id}`}>
                   <div className='website'>
                     <h4>{item.name}</h4>
@@ -63,6 +103,38 @@ const Dashboard = ({ userData }) => {
               ))}
             </div>
           )}
+          {view === 2 && (
+            <div className='settings-down'>
+              <div className='setting'>
+                Change Email{' '}
+                <form
+                  onSubmit={(e) => changeEmail(e)}
+                  onChange={(e) => checkForButton(e)}>
+                  <input type='email' placeholder='Email' />
+                  <input type='password' placeholder='Password' />
+                  {showSubmit && <button type='submit'>Change</button>}
+                </form>
+              </div>
+              <div className='setting'>
+                Change Password{' '}
+                <form
+                  onSubmit={(e) => changePwd(e)}
+                  onChange={(e) => checkForButton(e)}>
+                  <input type='password' placeholder='Old Password' />
+                  <input type='password' placeholder='New Password' />
+                  {showSubmit && <button type='submit'>Change</button>}
+                </form>
+              </div>
+              <div className='setting'>Delete Account</div>
+            </div>
+          )}
+          {view === 3 && (
+            <p>
+              Visitscout offers free and easy visit statistics for your website.
+              Just add your website and copy+paste the given script into each
+              page you want to track.
+            </p>
+          )}
         </section>
       </div>
     </>
@@ -70,7 +142,7 @@ const Dashboard = ({ userData }) => {
 }
 
 const mapStateToProps = (state) => ({
-  userData: state.auth.user.data
+  userData: state.auth
 })
 
 export default connect(mapStateToProps, { auth })(Dashboard)

@@ -275,9 +275,62 @@
   width: 100%;
 }
 
+.dashboard-container .dashboard-content p {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .dashboard-container .dashboard-content h2 {
   text-align: center;
   font-family: Hammersmith One;
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .settings-down {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  margin-left: 2rem;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting {
+  background: #aac2fd;
+  border: 2px solid #233f91;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: #233f91;
+  cursor: pointer;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting:hover {
+  background: #789efc;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting input {
+  background: transparent;
+  outline: none;
+  border: none;
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting input ::-webkit-input-placeholder {
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting input :-ms-input-placeholder {
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting input ::-ms-input-placeholder {
+  color: #233f91;
+}
+
+.dashboard-container .dashboard-content .settings-down .setting input ::placeholder {
   color: #233f91;
 }
 
@@ -292,6 +345,23 @@
   -webkit-column-gap: 2rem;
           column-gap: 2rem;
   row-gap: 3rem;
+}
+
+.dashboard-container .dashboard-content .auto-grid .card-option {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 2rem;
+  border: 1px solid #233f91;
+  border-radius: 0.5rem;
+  color: #ff6819;
+  cursor: pointer;
+  -webkit-transition: all 200ms;
+  transition: all 200ms;
+}
+
+.dashboard-container .dashboard-content .auto-grid .card-option:hover {
+  background: #aac2fd;
 }
 
 .dashboard-container .dashboard-content .auto-grid .website {
